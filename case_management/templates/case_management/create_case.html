@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New Case</title>
+    <style>
+        /* Reset some default styles */
+        html {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)),
+                url(https://cdn.thewire.in/wp-content/uploads/2018/01/13134741/SC1-e1525350670846.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        /* Style the container div */
+        .main {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(9px);
+        }
+
+        /* Style the form elements */
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 44px;
+            color: white;
+        }
+
+        .text,
+        .party_name,
+        .hearing,
+        .client {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 4px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            background: transparent;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            color: #fff;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 4px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .text input::placeholder {
+            color: #fff;
+        }
+
+        #id_parties_involved::placeholder {
+            color: white; 
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        br {
+            margin-top: 10px;
+        }
+
+        /* Style the link */
+        a {
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style for form container */
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Style for form fields */
+        .form-control {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        /* Style for submit button */
+        .submit-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Style for back link */
+        .back-link {
+            text-decoration: none;
+            color: #007BFF;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        .party_name textarea {
+            width: 100%;
+            padding: 10px;
+            border: 4px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            background: transparent;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form method="post">
+            {% csrf_token %}
+            <div class="heading">
+                <h1>Register a New Case</h1>
+            </div>
+            <div class="text">
+                {{ form.case_number.label_tag }}
+                {{ form.case_number }}
+                {{ form.case_number.errors }}
+            </div>
+            <div class="party_name">
+                {{ form.parties_involved.label_tag }}
+                {{ form.parties_involved }}
+                {{ form.parties_involved.errors }}
+            </div>
+            <div class="text">
+                {{ form.court_name.label_tag }}
+                {{ form.court_name }}
+                {{ form.court_name.errors }}
+            </div>
+            <div class="hearing">
+                {{ form.previous_hearing.label_tag }}
+                {{ form.previous_hearing }}
+                {{ form.previous_hearing.errors }}
+            </div>
+            <div class="hearing">
+                {{ form.next_hearing.label_tag }}
+                {{ form.next_hearing }}
+                {{ form.next_hearing.errors }}
+            </div>
+            <div class="client">
+                {{ form.client.label_tag }}
+                {{ form.client }}
+                {{ form.client.errors }}
+            </div>
+            <button style="border-radius:25px" class="submit-button" type="submit">Create Case</button>
+            <br><br>
+            <a href="{% url 'case_list' %}">Back to Case List</a>
+        </form>
+    </div>
+</body>
+</html>

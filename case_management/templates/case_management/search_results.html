@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .no-results {
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <p> Search Results are: </p>
+            {% for case in cases %}
+                <li>
+                    <a href="{% url 'case_detail' case.id %}">{{ case.case_number }}</a>
+                    <p>Parties Involved: {{ case.parties_involved }}</p>
+                    <p>Court: {{ case.court_name }}</p>
+                    <p>Next Hearing: {{ case.next_hearing }}</p>
+                    <p>Client: {{ case.client }}</p>
+                </li>
+            {% empty %}
+                <div class="no-results">No matching cases found.</div>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

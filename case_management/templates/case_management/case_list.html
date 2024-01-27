@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Case List</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,.7)),url(https://cdn.thewire.in/wp-content/uploads/2018/01/13134741/SC1-e1525350670846.jpg);
+            backdrop-filter: blur(9px);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            background-size: 150%;
+            padding: 0;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        h1 {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 50%;
+            margin-left: 25%;
+            border-radius: 25px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+
+        }
+
+        #search-form-container {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: transparent;    
+        }
+
+        #search-form {
+            display: flex;
+            align-items: center;
+            
+        }
+
+        #case-number {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            height: 30px;
+        }
+
+        #search-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            height: 40px;
+            text-align: center;
+        }
+
+        #search-results {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: transparent;
+            border-radius: 25px;
+        }
+
+        .case-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .case-list li {
+            margin: 0 0 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 3px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .case-list li a {
+            font-weight: bold;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .case-info {
+            margin-top: 10px;
+        }
+
+        .case-info p {
+            margin: 5px 0;
+        }
+
+        .create-case-link {
+            display: block;
+            text-align: center;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            margin-top: 20px;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+
+        .header{
+            text-align: right ;
+            margin-right: 20px;
+        }
+        
+        .login{
+            display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+        }
+
+        h2{
+            color:#fff;
+            margin-left: 20px;
+            text-align: center;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+<body >
+    <h1>Case List</h1>
+    <div class="header">
+        <button class="login"><a style="text-decoration: none;" href="{% url 'user_logout' %}">Logout</a></button>
+    </div>
+    {% if request.user.is_superuser %}
+    <h2>Welcome Admin</h2>
+    {% else %}
+    <h2> Welcome User</h2>
+    {% endif %}
+    <div class="container">
+        
+        <form id="search-form-container">
+            {% csrf_token %}
+            <div id="search-form">
+                <input type="text" id="case-number" placeholder="Search by Case Number">
+                <button type="submit" id="search-button"><b>Search</b></button>
+            </div>
+        </form>
+        <div id="search-results">
+            <!-- Search results will be displayed here -->
+        </div>
+        <div> <b style="color: #fff;">All cases are as following: </b> </div>
+        <ul class="case-list">
+            {% for case in cases %}
+                <li>
+                    <a href="{% url 'case_detail' case.id %}">{{ case.case_number }}</a>
+                    <div class="case-info">
+                        <p>Parties Involved: {{ case.parties_involved }}</p>
+                        <p>Court: {{ case.court_name }}</p>
+                        <p>Next Hearing: {{ case.next_hearing }}</p>
+                        <p>Client: {{ case.client }}</p>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No cases available.</li>
+            {% endfor %}
+        </ul>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'create_case' %}" class="create-case-link">Create a New Case</a>
+        {% endif %}
+    </div>
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#search-form-container').submit(function(e) {
+                e.preventDefault();
+                var searchTerm = $('#case-number').val();
+
+                // Make an AJAX request to perform the search
+                $.ajax({
+                    url: '{% url 'search_cases' %}',
+                    type: 'GET',
+                    data: { 'search_term': searchTerm },
+                    success: function(data) {
+                        $('#search-results').html(data);
+                    },
+                    error: function() {
+                        alert('An error occurred while searching.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

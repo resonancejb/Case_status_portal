@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Judiciary System</title>
+    <!-- <link rel="stylesheet" href="Home.css"> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        *{  margin:0 ;
+            padding:0 ;
+            font-family: 'roboto', sans-serif;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,.7)),url(https://cdn.thewire.in/wp-content/uploads/2018/01/13134741/SC1-e1525350670846.jpg);
+            background-position: center;
+            background-size: cover;
+            padding-left: 5%;
+            padding-right: 5%;
+            box-sizing: border-box;
+        }   
+        .navbar{
+            padding-top: 25px;
+            height: 12%;
+            display: flex;
+            align-items: center;
+        }
+        .logo{
+            width:50px;
+            cursor:pointer;
+        }
+        nav{
+            flex:1;
+            text-align: right;
+        }
+        nav ul li{
+            list-style: none;
+            display: inline-block;
+            margin-left: 60px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+        }
+        .row{
+            display: flex;
+            height: 80%;
+            align-items: center;
+        }
+        .col{
+            flex-basis: 50%;
+        }
+        h1{
+        color: #fff;
+        font-size:56px;
+        padding-bottom:30px;
+        }
+        p{
+            color: #fff;
+            font-family: 11px;
+            line-height: 15px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card{
+            height:70%;
+            margin-top: 0%;
+            margin-left: 250px;
+            width: 330px;
+            text-align: center;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+          }
+          body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color:gainsboro;
+            background-size: cover;
+            background-position: center;
+          }
+          .wrapper{
+            width: 420px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            backdrop-filter: blur(9px);
+            color: #fff;
+            border-radius: 12px;
+            padding: 30px 40px;
+          }
+          .wrapper h1{
+            font-size: 36px;
+            text-align: center;
+          }
+          .wrapper .input-box{
+            position: relative;
+            width: 100%;
+            height: 50px;
+            
+            margin: 30px 0;
+          }
+          .input-box input{
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid rgba(255, 255, 255, .2);
+            border-radius: 40px;
+            font-size: 16px;
+            color: #fff;
+            padding: 20px 45px 20px 20px;
+          }
+          .input-box input::placeholder{
+            color: #fff;
+          }
+          .input-box i{
+            position: absolute;
+            right: 20px;
+            top: 30%;
+            transform: translate(-50%);
+            font-size: 20px;
+          
+          }
+          .wrapper .remember-forgot{
+            display: flex;
+            justify-content: space-between;
+            font-size: 14.5px;
+            margin: -15px 0 15px;
+          }
+          .remember-forgot label input{
+            accent-color: #fff;
+            margin-right: 3px;
+          
+          }
+          .remember-forgot a{
+            color: #fff;
+            text-decoration: none;
+          
+          }
+          .remember-forgot a:hover{
+            text-decoration: underline;
+          }
+          .wrapper .btn{
+            width: 100%;
+            height: 45px;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+          }
+          .wrapper .register-link{
+            font-size: 14.5px;
+            text-align: center;
+            margin: 20px 0 15px;
+          
+          }
+          .register-link p a{
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+          }
+          .register-link p a:hover{
+            text-decoration: underline;
+          }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <img src="https://www.mea.gov.in/images/black-emblem.png" class="logo">
+        <nav class="main-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Indian Judiciary System</h1>
+                <p>The Indian judiciary, a vital democratic institution, upholds justice through a hierarchical structure, including the Supreme Court. Features like PIL empower citizens, and landmark decisions shape society, safeguarding fundamental rights. The judiciary stands as a guardian of democracy and citizens' rights.</p>
+            </div>
+            <div class="card">
+                <div class="wrapper">
+                    <form action="{% url 'user_login' %}" method="post">
+                        {% csrf_token %}
+                      <h1>Login</h1>
+                      <div class="input-box">
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                        <i class='bx bxs-user'></i>
+                      </div>
+                      <div class="input-box">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <i class='bx bxs-lock-alt' ></i>
+                      </div>
+                      <div class="remember-forgot">
+                        <label><input type="checkbox">Remember Me</label>
+                        <a href="#">Forgot Password</a>
+                      </div>
+                      <button type="submit" class="btn">Login</button>
+                      <!-- <div class="register-link">
+                        <p>Dont have an account? <a href="#">Register</a></p>
+                      </div> -->
+                    </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

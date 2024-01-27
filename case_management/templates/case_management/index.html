@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Case Management Portal</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Case Management Portal</h1>
+        <p>Manage your cases efficiently with our user-friendly portal.</p>
+    </header>
+
+
+    <main>
+        {% if request.user.is_authenticated %}
+        <h1>View all the cases</h1>
+        <a href="{% url 'case_list' %}">Click Here</a>
+        <!-- Add more content here as needed -->
+        {% else %}
+        <h2> Login first</h2>
+        <a href="{% url 'user_login' %}">Login</a>
+        {% endif %}
+    <!--  -->
+    </main>
+
+    <footer>
+        <!-- Add footer content if necessary -->
+    </footer>
+</body>
+</html>
